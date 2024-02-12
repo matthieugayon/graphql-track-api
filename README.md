@@ -38,7 +38,7 @@ $ npm install
 
 # Environment variables
 
-For running the app and the tests, you will need to create an .env file at the root of the cloned repository.
+For running the app and the tests, create an .env file at the root of the cloned repository.
 In this .env file the following variables need to be declared:
 
 - POSTGRES_USER: the posgresql user
@@ -59,14 +59,14 @@ And .env.example is provided with dummy variables.
 
 ## 1. Infrastructure
 
-You first need to spin off a postgresql database (which is the backend we chose for our prisma integration).
-You can do that by running the following docker command:
+First, spin off a postgresql database (which is the backend we chose for the prisma integration).
+It can be done by running the following docker command:
 
 ```bash
 $ docker-compose up -d
 ```
 
-Now you need to apply migrations based on our prisma schema, and generate the prisma client (typescript definitions based on the prisma schema):
+Apply migrations based on the prisma schema, and generate the prisma typescript client:
 
 ```bash
 $ npx prisma migrate deploy --schema prisma/schema.prisma
@@ -76,7 +76,7 @@ $ npx prisma generate --schema prisma/schema.prisma
 
 ## 2. Seed a user
 
-Since the /graphql endpoint is protected, you need to create a user and login with its credentials.
+Since the /graphql endpoint is protected, create a user and login with its credentials.
 For that matter we created a seed utility. Run it with
 
 ```bash
@@ -97,13 +97,13 @@ $ npm run start:dev
 
 Make a POST request to the /auth/login endpoint (the server is serving our API on http://localhost:3000).
 Body parameters (x-www-form-urlencoded): email & password.
-The API returns an access_token, which you can use in the GraphQL playground available at /graphql.
+The API returns an access_token, which can be used in the GraphQL playground available at /graphql.
 
 
 ## 5. GraphQL playground
 
 When the app is running, browse GraphQL playground here: http://localhost:3000/graphql.
-Since all queries / mutations are protected by Bearer token autentication, you need for each request to append a JSON object in the HTTP HEADERS area such as :
+Since all queries / mutations are protected by Bearer token autentication, append a JSON object for each request in the HTTP HEADERS area such as :
 
 ```json
 {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwNzc0MzkyOSwiZXhwIjoxNzA3NzQ0ODI5fQ.CmtD_A5-m405VzgxU1ZLXnOL4b6m6zuo9Bk68tL7xpc"}
@@ -120,7 +120,7 @@ $ npm run test
 
 ## e2e tests
 
-For e2e tests, we did not create a specific instrastructure for that, so it needs to be ran against the same docker setup. The dockerized postgresql database needs to be up and running & migrations applied & the test user seeded.
+We did not create a specific instrastructure for e2e tests, so it needs to be ran against the same docker setup. The dockerized postgresql database needs to be up and running & migrations applied & the test user seeded.
 
 ```bash
 $ npm run test:e2e
